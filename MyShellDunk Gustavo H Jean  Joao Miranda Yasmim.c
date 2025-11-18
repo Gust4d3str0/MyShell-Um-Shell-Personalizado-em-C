@@ -449,7 +449,8 @@ void loop_shell(void) {
 int main(int argc, char **argv) {
     (void)argc;
     (void)argv;
-// nosso tutubarao OwO
+// nosso tutubarao OwO 
+// parace o jean kkkkkkkkkkk
     printf(" _________         .    .          By Jean, Yasmim, Gustavo e JP Miranda\n"
            "(..       \\_     ,  |\\  /|\n"
            " \\         O \\   /|  \\ \\/ /\n"
