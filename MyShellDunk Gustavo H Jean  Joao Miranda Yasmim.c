@@ -12,22 +12,22 @@
 #define TAM_BUFFER_TOKENS 64
 #define DELIMITADORES " \t\r\n\a"
 
-// guarda a cor atual do prompt
+// guarda a cor atual do prompt Assim fica bonito XD
 char cor_prompt[20] = "\033[0m";
 
-// funções dos comandos internos
+// funções dos comandos internos UwU
 int meu_ls(char **args);
 int meu_cd(char **args);
 int meu_ajuda(char **args);
 int meu_sair(char **args);
 int meu_cor(char **args);
 
-// funções responsáveis por executar comandos
+// UwU funções responsáveis por executar comandos UwU
 int executar_simples(char **args, int background);
 int executar_pipe(char **cmd1_args, char **cmd2_args, int background);
 void reap_zombies(void);
 
-// estrutura de cada comando interno
+// estrutura de cada comando interno UwU UwU UwU UwU UwU UwU UwU
 struct comando_interno {
     char *nome;
     int (*funcao)(char **);
@@ -38,9 +38,9 @@ struct comando_interno internos[] = {
     {"ls",    &meu_ls},
     {"cd",    &meu_cd},
     {"ajuda", &meu_ajuda},
-    {"help",  &meu_ajuda},   // apelido para ajuda
+    {"help",  &meu_ajuda},   //agora ele é bilingue :) 
     {"sair",  &meu_sair},
-    {"exit",  &meu_sair},    // apelido para sair
+    {"exit",  &meu_sair},   
     {"cor",   &meu_cor},
 };
 
@@ -49,7 +49,7 @@ int num_internos() {
     return sizeof(internos) / sizeof(struct comando_interno);
 }
 
-// muda a cor do prompt usando nomes de cores simples
+// muda a cor do prompt usando nomes de cores simples Pra ficar bonitinho OwO
 int meu_cor(char **args) {
     if (args[1] == NULL) {
         fprintf(stderr, "Uso: cor <nome_da_cor>\n");
@@ -70,7 +70,7 @@ int meu_cor(char **args) {
     return 1;
 }
 
-// implementação simples do ls (lista arquivos da pasta)
+// implementação simples do ls (lista arquivos da pasta) UwU
 int meu_ls(char **args) {
     DIR *d;
     struct dirent *dir;
@@ -107,7 +107,7 @@ int meu_cd(char **args) {
 
 // mostra uma ajuda básica sobre o shell e os comandos internos
 int meu_ajuda(char **args) {
-    (void)args; // não usado
+    (void)args; 
 
     printf("Meu Shell Personalizado (MyShell)\n");
     printf("Digite o nome do programa e argumentos, e pressione enter.\n\n");
@@ -132,7 +132,7 @@ int meu_sair(char **args) {
     return 0;   // faz o loop do shell parar
 }
 
-// executa um comando simples (sem pipe), com redirecionamento e background
+// executa um comando simples (sem pipe), com redirecionamento e background UwU
 int executar_simples(char **args, int background) {
     char *inputFile = NULL;
     char *outputFile = NULL;
@@ -180,7 +180,7 @@ int executar_simples(char **args, int background) {
     if (pid < 0) {
         perror("meu_shell (fork)");
     } else if (pid == 0) {
-        // parte do filho: cuida de redirecionamento e depois executa o comando
+        // parte do filho: cuida de redirecionamento e depois executa o comando UwU
         if (inputFile) {
             int fd_in = open(inputFile, O_RDONLY);
             if (fd_in < 0) {
@@ -215,7 +215,7 @@ int executar_simples(char **args, int background) {
         exit(EXIT_FAILURE);
 
     } else {
-        // parte do pai: só espera se não for background
+        // parte do pai: só espera se não for background UwU
         if (!background) {
             waitpid(pid, &status, 0);
         }
@@ -223,7 +223,7 @@ int executar_simples(char **args, int background) {
     return 1;
 }
 
-// executa dois comandos ligados com pipe: cmd1 | cmd2
+// executa dois comandos ligados com pipe: cmd1 | cmd2 UwU
 int executar_pipe(char **cmd1_args, char **cmd2_args, int background) {
     int pipe_fd[2];
     pid_t pid1, pid2;
@@ -299,7 +299,7 @@ int executar(char **args) {
     char **cmd_pipe = NULL;
     
     int i = 0;
-    // procura um pipe no comando
+    // procura um pipe no comando UwU UwU
     while (args[i] != NULL) {
         if (strcmp(args[i], "|") == 0) {
             args[i] = NULL;
@@ -313,7 +313,7 @@ int executar(char **args) {
         i++;
     }
 
-    // trata o '&' no final (background), inclusive grudado no último token
+    // UwU
     char **comando_a_verificar_bg = cmd_pipe ? cmd_pipe : args;
     int j = 0;
     while (comando_a_verificar_bg[j] != NULL) {
@@ -381,7 +381,7 @@ char *ler_linha(void) {
     }
 }
 
-// quebra a linha em tokens (argumentos) usando strtok
+// quebra a linha em tokens (argumentos) usando strtokOwO
 char **dividir_linha(char *linha) {
     int bufsize = TAM_BUFFER_TOKENS;
     int position = 0;
@@ -413,7 +413,7 @@ char **dividir_linha(char *linha) {
     return tokens;
 }
 
-// coleta processos zumbis de background
+// coleta processos zumbis de background OwO
 void reap_zombies(void) {
     int status;
     pid_t pid;
@@ -423,7 +423,7 @@ void reap_zombies(void) {
     }
 }
 
-// laço principal do shell: mostra o prompt, lê e executa comandos
+// laço principal do shell: mostra o prompt, lê e executa comandos OwO
 void loop_shell(void) {
     char *linha;
     char **args;
@@ -445,11 +445,11 @@ void loop_shell(void) {
     } while (status);
 }
 
-// ponto de entrada: mostra o banner e inicia o loop do shell
+// ponto de entrada: mostra o banner e inicia o loop do shell OwO
 int main(int argc, char **argv) {
     (void)argc;
     (void)argv;
-
+// nosso tutubarao OwO
     printf(" _________         .    .          By Jean, Yasmim, Gustavo e JP Miranda\n"
            "(..       \\_     ,  |\\  /|\n"
            " \\         O \\   /|  \\ \\/ /\n"
